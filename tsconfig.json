@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "declaration": true,
+    "pretty": true,
+    "rootDir": "src",
+    "strict": true,
+    "sourceMap": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "lib",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "importHelpers": true
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "esm",
+    "tests",
+    "stories",
+    "jest.config.ts",
+    "jest.config.*.ts"
+  ]
+}
