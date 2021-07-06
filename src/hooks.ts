@@ -1,5 +1,4 @@
-
-import { useState, useRef, useCallback, useMemo, MutableRefObject } from 'react';
+import { MutableRefObject, useCallback, useMemo, useRef, useState } from 'react';
 
 export const useEnableDisable = (defaultValue = false): [boolean, VoidFunction, VoidFunction] => {
   const [value, toggleValue] = useState(defaultValue);
@@ -8,7 +7,7 @@ export const useEnableDisable = (defaultValue = false): [boolean, VoidFunction, 
   const onDisable = useCallback(() => toggleValue(false), []);
 
   return [value, onEnable, onDisable];
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const useCache = <T extends object>(defaultData: T, dataToUpdate: Partial<T> = defaultData): MutableRefObject<T> => {

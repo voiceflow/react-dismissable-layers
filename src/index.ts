@@ -1,4 +1,4 @@
-export { DismissEventType } from './Subscriber';
+export { DismissableLayerConsumer, default as DismissableLayerContext, DismissableLayerProvider } from './DismissableLayerContext';
 export { default as DismissableLayersProvider } from './DismissableLayersProvider';
+export { DismissEventType } from './Subscriber';
 export { default as useDismissable } from './useDismissable';
-export { default as DismissableLayerContext, DismissableLayerConsumer, DismissableLayerProvider } from './DismissableLayerContext';

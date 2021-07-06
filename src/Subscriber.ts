@@ -1,4 +1,3 @@
-
 export type DismissEventHandler = (event?: Event) => void;
 
 export type DismissEventType = 'click' | 'mousedown' | 'mouseup';
@@ -14,9 +13,9 @@ class Subscriber {
 
   private handler: DismissEventHandler = (event): void => {
     if (!this.nestedSubscriber?.hasRootOrNestedHandler()) {
-      this.originalHandler?.(event)
+      this.originalHandler?.(event);
     }
-  }
+  };
 
   protected hasRootOrNestedHandler(): boolean {
     return this.hasHandler() || !!this.nestedSubscriber?.hasRootOrNestedHandler();
@@ -61,4 +60,4 @@ class Subscriber {
   }
 }
 
-export default Subscriber
+export default Subscriber;

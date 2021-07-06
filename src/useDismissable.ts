@@ -1,8 +1,8 @@
-import { useContext, useCallback, useEffect, RefObject } from 'react';
+import { RefObject, useCallback, useContext, useEffect } from 'react';
 
-import { DismissEventType } from './Subscriber';
 import DismissableLayerContext from './DismissableLayerContext';
 import { useCache, useEnableDisable } from './hooks';
+import { DismissEventType } from './Subscriber';
 
 interface Options {
   /**
@@ -43,17 +43,11 @@ type Api = readonly [
    * function to force close popper
    */
   close: VoidFunction
-]
+];
 
 const useDismissable = (
   defaultValue = false,
-  {
-    ref,
-    onClose,
-    dismissEvent = 'click',
-    disableLayers = false,
-    skipDefaultPrevented = true,
-  }: Options = {}
+  { ref, onClose, dismissEvent = 'click', disableLayers = false, skipDefaultPrevented = true }: Options = {}
 ): Api => {
   const dismissableLayer = useContext(DismissableLayerContext);
 
@@ -70,9 +64,14 @@ const useDismissable = (
 
   const handleClose = useCallback(
     (event?: Event) => {
-      if (!cache.current.isOpened) return;
-      if (cache.current.skipDefaultPrevented && event?.defaultPrevented) return;
-      if (event?.target && ref?.current?.contains?.(event.target as Element)) return;
+      const skipEvent =
+        !cache.current.isOpened ||
+        (cache.current.skipDefaultPrevented && event?.defaultPrevented) ||
+        (event?.target && ref?.current?.contains?.(event.target as Element));
+
+      if (skipEvent) {
+        return;
+      }
 
       cache.current.isOpened = false;
       setClosed();
@@ -86,26 +85,22 @@ const useDismissable = (
   const onToggle = isOpened ? forceClose : handleOpen;
 
   useEffect(() => {
-    if (isOpened) {
-      if (!disableLayers) {
-        dismissableLayer.addHandler(dismissEvent, handleClose);
-      } else {
-        dismissableLayer.rootNode.addEventListener(dismissEvent, handleClose);
-      }
-
-      return () => {
-        if (!disableLayers) {
-          dismissableLayer.removeHandler(dismissEvent);
-        } else {
-          dismissableLayer.rootNode.removeEventListener(dismissEvent, handleClose);
-        }
-      };
+    if (!isOpened) {
+      return undefined;
     }
 
-    return undefined;
+    if (!disableLayers) {
+      dismissableLayer.addHandler(dismissEvent, handleClose);
+
+      return () => dismissableLayer.removeHandler(dismissEvent);
+    }
+
+    dismissableLayer.rootNode.addEventListener(dismissEvent, handleClose);
+
+    return () => dismissableLayer.rootNode.removeEventListener(dismissEvent, handleClose);
   }, [isOpened, dismissEvent, handleClose, dismissableLayer, disableLayers]);
 
   return [isOpened, onToggle, handleClose];
-}
+};
 
-export default useDismissable
+export default useDismissable;

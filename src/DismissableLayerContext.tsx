@@ -1,10 +1,8 @@
-import React, { PropsWithChildren, ReactElement, useContext, useMemo, useCallback, useEffect, createContext } from 'react';
+import React, { createContext, PropsWithChildren, ReactElement, useCallback, useContext, useEffect, useMemo } from 'react';
 
-import GlobalLayersContext from './GlobalLayersContext'
-
-import Subscriber, { DismissEventHandler, DismissEventType } from './Subscriber'
-
+import GlobalLayersContext from './GlobalLayersContext';
 import { useContextApi } from './hooks';
+import Subscriber, { DismissEventHandler, DismissEventType } from './Subscriber';
 
 interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
   /**
@@ -53,15 +51,15 @@ const DismissableLayerContext = createContext<DismissableLayerValue<HTMLElement 
 
   rootNode: document,
 
-  dismiss: () => void 0,
+  dismiss: () => undefined,
 
   hasHandler: () => false,
 
-  addHandler: () => void 0,
+  addHandler: () => undefined,
 
-  removeHandler: () => void 0,
+  removeHandler: () => undefined,
 
-  dismissAllGlobally: () => void 0,
+  dismissAllGlobally: () => undefined,
 
   hasHandlersGlobally: () => false,
 });
@@ -82,16 +80,22 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   }, [subscriber]);
 
   const hasHandler = useCallback(() => {
-    return subscriber.hasHandler()
+    return subscriber.hasHandler();
   }, [subscriber]);
 
-  const addHandler = useCallback((eventType: DismissEventType, handler: DismissEventHandler) => {
-    subscriber.subscribe(eventType, handler);
-  }, [subscriber]);
+  const addHandler = useCallback(
+    (eventType: DismissEventType, handler: DismissEventHandler) => {
+      subscriber.subscribe(eventType, handler);
+    },
+    [subscriber]
+  );
 
-  const removeHandler = useCallback((eventType: DismissEventType) => {
-    subscriber.unsubscribe(eventType);
-  }, [subscriber]);
+  const removeHandler = useCallback(
+    (eventType: DismissEventType) => {
+      subscriber.unsubscribe(eventType);
+    },
+    [subscriber]
+  );
 
   useEffect(() => {
     const globalLayer = { dismiss, hasHandler };
@@ -104,9 +108,11 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   }, [dismiss, hasHandler, globalLayers]);
 
   useEffect(() => {
+    // eslint-disable-next-line no-underscore-dangle
     parentLayer?._subscriber.registerNestedSubscriber(subscriber);
 
     return () => {
+      // eslint-disable-next-line no-underscore-dangle
       parentLayer?._subscriber.unregisterNestedSubscriber();
     };
   }, [subscriber, parentLayer]);
@@ -125,4 +131,4 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   return <DismissableLayerContext.Provider value={value}>{children}</DismissableLayerContext.Provider>;
 };
 
-export default DismissableLayerContext
+export default DismissableLayerContext;

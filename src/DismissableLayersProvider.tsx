@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { GlobalLayersProvider } from './GlobalLayersContext';
 import { DismissableLayerProvider } from './DismissableLayerContext';
+import { GlobalLayersProvider } from './GlobalLayersContext';
 
 interface DismissableLayersProviderProps {
   /**

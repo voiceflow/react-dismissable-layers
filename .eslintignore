@@ -1,4 +1,5 @@
 lib/
+esm/
 node_modules/
 jest_coverage/
 nyc_coverage_unit/

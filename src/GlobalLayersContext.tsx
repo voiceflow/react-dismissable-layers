@@ -1,4 +1,4 @@
-import React, { FC, useRef, createContext, useCallback } from 'react';
+import React, { createContext, FC, useCallback, useRef } from 'react';
 
 import { useContextApi } from './hooks';
 
@@ -19,11 +19,11 @@ interface GlobalLayersContextValue {
 }
 
 const GlobalLayersContext = createContext<GlobalLayersContextValue>({
-  register: () => void 0,
+  register: () => undefined,
 
-  unregister: () => void 0,
+  unregister: () => undefined,
 
-  dismissAll: () => void 0,
+  dismissAll: () => undefined,
 
   hasHandlers: () => false,
 });
@@ -34,27 +34,29 @@ export const GlobalLayersProvider: FC = ({ children }) => {
 
   const dismissAll = useCallback(() => {
     // to close deepest ones first
-    Array.from(layersRefs.current).reverse().forEach((globalLayer) => globalLayer.dismiss())
-  }, [])
+    Array.from(layersRefs.current)
+      .reverse()
+      .forEach((globalLayer) => globalLayer.dismiss());
+  }, []);
 
   const hasHandlers = useCallback(() => {
-    return layersRefs.current.some((globalLayer) => globalLayer.hasHandler())
-  }, [])
+    return layersRefs.current.some((globalLayer) => globalLayer.hasHandler());
+  }, []);
 
   const register = useCallback((globalLayer: GlobalLayer) => {
-    layersRefs.current.push(globalLayer)
-  }, [])
+    layersRefs.current.push(globalLayer);
+  }, []);
 
   const unregister = useCallback((globalLayer: GlobalLayer) => {
-    layersRefs.current = layersRefs.current.filter(layer => layer !== globalLayer)
-  }, [])
+    layersRefs.current = layersRefs.current.filter((layer) => layer !== globalLayer);
+  }, []);
 
   const api = useContextApi({
     register,
     unregister,
     dismissAll,
     hasHandlers,
-  })
+  });
 
   return <GlobalLayersContext.Provider value={api}>{children}</GlobalLayersContext.Provider>;
 };
