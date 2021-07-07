@@ -26,7 +26,7 @@
     "build:es": "tsc -m esNext --outDir esm",
     "build": "yarn build:cjs && yarn build:es",
     "clean": "rimraf lib storybook-static esm",
-    "storybook": "start-storybook -p 6008",
+    "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "storybook:upload": "gh-pages -d storybook-static --git \"$(which git)\"",
     "storybook:clean": "rimraf storybook-static",
@@ -56,7 +56,14 @@
     "react-dom": "^16.0.0  || ^17.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.3.2",
+    "@storybook/addon-essentials": "^6.3.2",
+    "@storybook/addon-links": "^6.3.2",
+    "@storybook/react": "^6.3.2",
     "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "@types/styled-components": "^5.1.11",
     "@voiceflow/commitlint-config": "^1.1.0",
     "@voiceflow/eslint-config": "3.2.2",
     "@voiceflow/prettier-config": "^1.0.5",
@@ -64,6 +71,7 @@
     "@voiceflow/stylelint-config": "^1.0.0",
     "@voiceflow/tsconfig": "^1.0.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "babel-loader": "^8.2.2",
     "commitizen": "^4.2.3",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^7.27.0",
@@ -72,7 +80,10 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.3.2",
     "prettier-stylelint": "^0.4.2",
+    "react-popper": "^2.2.5",
     "rimraf": "^3.0.2",
+    "styled-components": "^5.3.0",
     "typescript": "^4.3.5"
-  }
+  },
+  "dependencies": {}
 }

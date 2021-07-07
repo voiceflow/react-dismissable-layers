@@ -34,17 +34,17 @@
 
 ## API
 
-- `DismissableLayersProvider` - global provider for Dismissable Layers, wrap the whole app to make the `useDismissable` hook works with layers.
+- `DismissableLayersGlobalProvider` - global provider for Dismissable Layers, wrap the whole app to make the `useDismissable` hook works with layers.
 
   ```typescript
-    interface DismissableLayersProviderProps {
+    interface DismissableLayersGlobalProviderProps {
       /**
        * optional prop, the HTML-node to listen close events, default is `document`
       */
       rootNode?: HTMLElement | Document;
     }
 
-    const DismissableLayersProvider = React.FC<DismissableLayersProviderProps>
+    const DismissableLayersGlobalProvider = React.FC<DismissableLayersGlobalProviderProps>
   ```
 
 <br/>
@@ -52,48 +52,48 @@
 - `useDismissable` - a hook to toggle and dismiss poppers.
 
   ```typescript
-    interface Options {
-      /**
-       * ref for the popper content, to do not close on the content's [dismissEvent] action
-      */
-      ref?: RefObject<Element>;
+  interface Options {
+    /**
+     * ref for the popper content, to do not close on the content's [dismissEvent] action
+     */
+    ref?: RefObject<Element>;
 
-      /**
-       * callback which will be invoked when the popper is closed
-      */
-      onClose?: null | VoidFunction;
+    /**
+     * callback which will be invoked when the popper is closed
+     */
+    onClose?: null | VoidFunction;
 
-      /**
-       * event on which popper will be closed, default is `'click'`
-      */
-      dismissEvent?: DismissEventType;
+    /**
+     * event on which popper will be closed, default is `'click'`
+     */
+    dismissEvent?: DismissEventType;
 
-      /**
-       * the popper will be closed just by the [dismissEvent] action, without any layers logic, default is `false`
-      */
-      disableLayers?: boolean;
+    /**
+     * the popper will be closed just by the [dismissEvent] action, without any layers logic, default is `false`
+     */
+    disableLayers?: boolean;
 
-      /**
-       * do not close on default prevented events, default is `true`
-      */
-      skipDefaultPrevented?: boolean;
-    }
+    /**
+     * do not close on default prevented events, default is `true`
+     */
+    skipDefaultPrevented?: boolean;
+  }
 
-    type Api = readonly [
-      isOpened: boolean,
+  type Api = readonly [
+    isOpened: boolean,
 
-      /**
-      * function to toggle popper
-      */
-      toggle: VoidFunction,
+    /**
+     * function to toggle popper
+     */
+    toggle: VoidFunction,
 
-      /**
-      * function to force close popper
-      */
-      close: VoidFunction
-    ]
+    /**
+     * function to force close popper
+     */
+    close: VoidFunction
+  ];
 
-    const useDismissable = (defaultValue = false, options: Options = {}) => Api;
+  const useDismissable = (defaultValue = false, options: Options = {}) => Api;
   ```
 
 <br />
@@ -143,7 +143,7 @@
       readonly hasHandlersGlobally: () => boolean;
     }
 
-    const DismissableLayersProvider = React.FC<DismissableLayersProviderProps>
+    const DismissableLayersGlobalProvider = React.FC<DismissableLayersGlobalProviderProps>
   ```
 
 <br />

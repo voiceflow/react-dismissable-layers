@@ -48,6 +48,7 @@ type Api = readonly [
 const useDismissable = (
   defaultValue = false,
   { ref, onClose, dismissEvent = 'click', disableLayers = false, skipDefaultPrevented = true }: Options = {}
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 ): Api => {
   const dismissableLayer = useContext(DismissableLayerContext);
 
@@ -57,7 +58,6 @@ const useDismissable = (
   const handleOpen = useCallback(() => {
     if (cache.current.isOpened) return;
 
-    cache.current.isOpened = true;
     dismissableLayer.dismiss();
     setOpen();
   }, [cache, setOpen, dismissableLayer]);
@@ -73,7 +73,6 @@ const useDismissable = (
         return;
       }
 
-      cache.current.isOpened = false;
       setClosed();
       cache.current.onClose?.();
     },
@@ -89,18 +88,28 @@ const useDismissable = (
       return undefined;
     }
 
-    if (!disableLayers) {
-      dismissableLayer.addHandler(dismissEvent, handleClose);
+    const animationFrame = requestAnimationFrame(() => {
+      if (!disableLayers) {
+        dismissableLayer.addHandler(dismissEvent, handleClose);
+      } else {
+        dismissableLayer.rootNode.addEventListener(dismissEvent, handleClose);
+      }
+    });
 
-      return () => dismissableLayer.removeHandler(dismissEvent);
-    }
+    return () => {
+      cancelAnimationFrame(animationFrame);
 
-    dismissableLayer.rootNode.addEventListener(dismissEvent, handleClose);
-
-    return () => dismissableLayer.rootNode.removeEventListener(dismissEvent, handleClose);
+      requestAnimationFrame(() => {
+        if (!disableLayers) {
+          dismissableLayer.removeHandler(dismissEvent, handleClose);
+        } else {
+          dismissableLayer.rootNode.removeEventListener(dismissEvent, handleClose);
+        }
+      });
+    };
   }, [isOpened, dismissEvent, handleClose, dismissableLayer, disableLayers]);
 
-  return [isOpened, onToggle, handleClose];
+  return [isOpened, onToggle, forceClose];
 };
 
 export default useDismissable;

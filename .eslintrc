@@ -2,7 +2,7 @@
   "extends": ["@voiceflow/eslint-config", "@voiceflow/eslint-config/frontend", "@voiceflow/eslint-config/typescript"],
   "overrides": [
     {
-      "files": ["test/**/*", "config/**/*", "*.config.js", ".*rc.js"],
+      "files": ["test/**/*", "config/**/*", "stories/**/*", "*.config.js", ".*rc.js"],
       "extends": ["@voiceflow/eslint-config/utility"],
       "rules": {
         // off

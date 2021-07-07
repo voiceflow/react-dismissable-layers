@@ -3,13 +3,17 @@ export type DismissEventHandler = (event?: Event) => void;
 export type DismissEventType = 'click' | 'mousedown' | 'mouseup';
 
 class Subscriber {
+  private rootNode: HTMLElement | Document;
+
   private originalHandler: DismissEventHandler | null = null;
 
   private nestedSubscriber: Subscriber | null = null;
 
   private eventType: DismissEventType | null = null;
 
-  constructor(private rootNode: HTMLElement | Document) {}
+  constructor(rootNode: HTMLElement | Document) {
+    this.rootNode = rootNode;
+  }
 
   private handler: DismissEventHandler = (event): void => {
     if (!this.nestedSubscriber?.hasRootOrNestedHandler()) {
@@ -22,7 +26,7 @@ class Subscriber {
   }
 
   hasHandler(): boolean {
-    return !!this.handler;
+    return !!this.originalHandler;
   }
 
   subscribe(eventType: DismissEventType, handler: DismissEventHandler): void {
@@ -37,11 +41,12 @@ class Subscriber {
     this.rootNode.addEventListener(eventType, this.handler);
   }
 
-  unsubscribe(eventType: DismissEventType): void {
-    if (!this.eventType) {
+  unsubscribe(eventType: DismissEventType, handler?: DismissEventHandler): void {
+    if (!this.eventType || !this.originalHandler || this.eventType !== eventType || (handler && this.originalHandler !== handler)) {
       return;
     }
 
+    this.eventType = null;
     this.originalHandler = null;
     this.rootNode.removeEventListener(eventType, this.handler);
   }

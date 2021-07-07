@@ -33,7 +33,7 @@ interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
   /**
    * remove close handler from the current layer
    */
-  readonly removeHandler: (eventType: DismissEventType) => void;
+  readonly removeHandler: (eventType: DismissEventType, handler: DismissEventHandler) => void;
 
   /**
    * dismiss all on all layers
@@ -68,12 +68,14 @@ export const { Consumer: DismissableLayerConsumer } = DismissableLayerContext;
 
 export const DismissableLayerProvider = <T extends HTMLElement | Document = Document>({
   children,
-  rootNode = document as T,
+  rootNode,
 }: PropsWithChildren<{ rootNode?: T }>): ReactElement => {
   const parentLayer = useContext(DismissableLayerContext);
   const globalLayers = useContext(GlobalLayersContext);
 
-  const subscriber = useMemo(() => new Subscriber(rootNode), [rootNode]);
+  const localRootNode = rootNode ?? parentLayer.rootNode;
+
+  const subscriber = useMemo(() => new Subscriber(localRootNode), [localRootNode]);
 
   const dismiss = useCallback(() => {
     subscriber.forceHandle();
@@ -91,8 +93,8 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   );
 
   const removeHandler = useCallback(
-    (eventType: DismissEventType) => {
-      subscriber.unsubscribe(eventType);
+    (eventType: DismissEventType, handler: DismissEventHandler) => {
+      subscriber.unsubscribe(eventType, handler);
     },
     [subscriber]
   );
@@ -118,8 +120,8 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   }, [subscriber, parentLayer]);
 
   const value = useContextApi<DismissableLayerValue<T>>({
-    rootNode,
     _subscriber: subscriber,
+    rootNode: localRootNode as T,
     dismiss,
     hasHandler,
     addHandler,
