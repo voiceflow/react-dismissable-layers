@@ -1,20 +1,20 @@
 <div align="center">
   <h1>
     <br/>
-    @voiceflow/react-dismissable-layers
+    react-dismissable-layers
     <br />
     <br />
   </h1>
 
   <sup>
-    <a href="https://www.npmjs.com/package/@voiceflow/react-dismissable-layers">
-       <img src="https://img.shields.io/npm/v/@voiceflow/react-dismissable-layers.svg" alt="npm package" />
+    <a href="https://www.npmjs.com/package/react-dismissable-layers">
+       <img src="https://img.shields.io/npm/v/react-dismissable-layers.svg" alt="npm package" />
     </a>
     <a href="https://circleci.com/gh/voiceflow/react-dismissable-layers">
       <img src="https://img.shields.io/circleci/project/github/voiceflow/react-dismissable-layers/master.svg" alt="CircleCI master" />
     </a>
-    <a href="https://www.npmjs.com/package/@voiceflow/react-dismissable-layers">
-      <img src="https://img.shields.io/npm/dm/@voiceflow/react-dismissable-layers.svg" alt="npm downloads" />
+    <a href="https://www.npmjs.com/package/react-dismissable-layers">
+      <img src="https://img.shields.io/npm/dm/react-dismissable-layers.svg" alt="npm downloads" />
     </a>
     <a href="http://voiceflow.github.io/react-dismissable-layers">
       <img src="https://img.shields.io/badge/demos-🚀-lightblue.svg" alt="demos" />
@@ -23,18 +23,63 @@
 
   <br />
   <br />
+  
+maintained by [@voiceflow](https://github.com/voiceflow)
 
-> Context and hook to add support of nested and auto-dismissable layers. Nested layers are closing first, parent layer won't be closed until nested is opened. Best to use with [react-popper](https://github.com/popperjs/react-popper).
+> Context and hook to add support for nested, auto-dismissable layers. State can be globally controlled through context. Best used with [react-popper](https://github.com/popperjs/react-popper).
 
   <br />
 
-  <pre>npm i <a href="https://www.npmjs.com/package/@voiceflow/react-dismissable-layers">@voiceflow/react-dismissable-layers</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/react-dismissable-layers">react-dismissable-layers</a></pre>
+
+  <pre>yarn add <a href="https://www.npmjs.com/package/react-dismissable-layers">react-dismissable-layers</a></pre>
 </div>
 <br />
 
+## Demo
+Check out the [Storybook Demo](https://voiceflow.github.io/react-dismissable-layers) to see in action.
+
+<img width="1097" alt="Screen Shot 2021-07-07 at 8 35 04 AM" src="https://user-images.githubusercontent.com/5643574/124788492-3cea9c80-defe-11eb-94e9-bb1d2d2b30c2.png">
+
+## Quick Start
+Add `<DismissableLayersGlobalProvider>` on a parent component. 
+Use the `useDismissable()` hook to associate different toggleable components.
+
+```jsx
+import { useDismissable } from 'react-dismissable-layers';
+
+// open and close
+const Component = () => {
+  const [open, toggleOpen] = useDismissable(false);
+
+  return <div>
+    <button onClick={toggleOpen}>Open Tooltip</button>
+    {open && (
+      <Popper>
+        Tooltip Content
+      </Popper>
+    )}
+  </div>
+}
+```
+```jsx
+import { DismissableLayerContext } from 'react-dismissable-layers';
+
+// close all dismissibles in context
+const OtherComponent = () => {
+  const dismissOverlay = React.useContext(DismissableLayerContext);
+
+  const close = React.useCallback(() => {
+    dismissOverlay.dismissAllGlobally();
+  }, [])
+
+  return <button onClick={close}>Close All</button>
+}
+```
+
 ## API
 
-- `DismissableLayersGlobalProvider` - global provider for Dismissable Layers, wrap the whole app to make the `useDismissable` hook works with layers.
+- `DismissableLayersGlobalProvider` - global provider for Dismissable Layers, wrap the whole app to make sure the `useDismissable` hook works with layers.
 
   ```typescript
     interface DismissableLayersGlobalProviderProps {
@@ -54,7 +99,7 @@
   ```typescript
   interface Options {
     /**
-     * ref for the popper content, to do not close on the content's [dismissEvent] action
+     * ref for the popper content, to not close on the content's [dismissEvent] action
      */
     ref?: RefObject<Element>;
 
@@ -98,7 +143,7 @@
 
 <br />
 
-- `DismissableLayerContext` - a context to read dissmissable layer, in most cases shouldn't be used in app layer.
+- `DismissableLayerContext` - a context to read a dissmissable layer, in most cases shouldn't be used in app layer.
 
   ```typescript
     interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
