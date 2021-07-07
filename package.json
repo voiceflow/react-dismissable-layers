@@ -1,5 +1,5 @@
 {
-  "name": "@voiceflow/react-dismissable-layers",
+  "name": "react-dismissable-layers",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
