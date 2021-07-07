@@ -36,6 +36,7 @@ build/Release
 # compiled source code
 lib/
 esm/
+storybook-static/
 
 # Dependency directories
 node_modules/
