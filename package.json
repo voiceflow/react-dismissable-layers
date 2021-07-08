@@ -5,7 +5,7 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "React dismissable context and hook with layers (nesting) support",
   "main": "lib/index.js",
   "module": "esm/index.js",
