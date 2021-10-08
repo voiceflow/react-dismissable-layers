@@ -1,4 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>voiceflow/renovate-config:creators"]
+  "extends": ["github>voiceflow/renovate-config:creator"]
 }
