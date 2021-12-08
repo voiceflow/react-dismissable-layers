@@ -3023,10 +3023,10 @@
     "@typescript-eslint/types" "5.5.0"
     eslint-visitor-keys "^3.0.0"
 
-"@voiceflow/commitlint-config@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@voiceflow/commitlint-config/-/commitlint-config-1.1.0.tgz#736b9e099830834b4f85998242d4cff6b1968dfd"
-  integrity sha512-5bBAyKsjT7R/mDBDpfvS9l04srf2DfAMJnhKlJFkuSyFM3qm/by7k5DQxLMrZySKOKxbxhykaTM1zm7/e8/yzg==
+"@voiceflow/commitlint-config@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@voiceflow/commitlint-config/-/commitlint-config-1.1.1.tgz#cb3cfa6807c77ad2932d400ac9fbe0f0c8853644"
+  integrity sha512-/HIWnPfiJ8PJ7FuvrOoYfLj1qc3eep+FvIITjG6tOQx2HxO6g1a44MjlFWJsyhfLHwqhkDE+fZbPdeSBPRN/nQ==
   dependencies:
     "@commitlint/config-conventional" "^12.1.4"
 
@@ -3060,15 +3060,15 @@
     eslint-plugin-xss "^0.1.9"
     eslint-plugin-you-dont-need-lodash-underscore "^6.12.0"
 
-"@voiceflow/prettier-config@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@voiceflow/prettier-config/-/prettier-config-1.0.5.tgz#307caf65040ae0c0539ecb8531b9e403381f11ab"
-  integrity sha512-yM35E7UI0fD8yMgL7JImljvMLZVU+jCz/latc2s2e7Nlbr9kiMpO0FArjkaXVIghhcUeQ0y04lsFUHRu3kMzmA==
+"@voiceflow/prettier-config@1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@voiceflow/prettier-config/-/prettier-config-1.0.6.tgz#c06ba240703eaed4516bc8719a23604a37ff6d83"
+  integrity sha512-Q1VChvhTYGw/jtg2YBrFwd9wjqogvQaSppTrqNaOvmq9tgqLOPgZC20zBAwbM5JX6UPC6bKXN0qit0LLddC/kw==
 
-"@voiceflow/semantic-release-config@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@voiceflow/semantic-release-config/-/semantic-release-config-1.0.8.tgz#686bd93b08befb32a0ac71ffdb859858d77def1c"
-  integrity sha512-ezfrfVvk1ykXtjzN0hV4VpIiro324sse6DgJbQT670mRni/cX+wiaX2zh2fVtZ//oKohB+SZ8J39QDOBDf6FfA==
+"@voiceflow/semantic-release-config@1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@voiceflow/semantic-release-config/-/semantic-release-config-1.0.9.tgz#554db37a002625750507465bcf9db0550761cecc"
+  integrity sha512-da0reGwhxtWXLT9f6+uLbiyBjr5DKl2J0INLH11LAzqmi91TdylYLEnl+df70HrZSzTsWMpHkuKIDoudx7bkOg==
   dependencies:
     "@semantic-release/commit-analyzer" "^6.1.0"
     "@semantic-release/exec" "^3.3.8"
@@ -3076,10 +3076,10 @@
     "@semantic-release/npm" "^5.0.5"
     "@semantic-release/release-notes-generator" "^9.0.2"
 
-"@voiceflow/stylelint-config@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@voiceflow/stylelint-config/-/stylelint-config-1.0.0.tgz#920e7b5fca7477247f1d159d73b1a802432a1361"
-  integrity sha512-k6GacTsXuE35g9Ztnv3qhyS/eArBv/isqpYCdBwOLeSy/6kSHpR21lMsd1YKPIvnMio5IFyWMKBR+WYPQjjHkg==
+"@voiceflow/stylelint-config@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@voiceflow/stylelint-config/-/stylelint-config-1.0.1.tgz#f2576ee5c4e7de0a30b8aaa916f8a67a251261fd"
+  integrity sha512-soEHBVKe26OTMVQIZJbLFCGMffKDxtGdDxp9dhNOETGkUKoVNrbcBOfVAlknr6GN3/TtraSPTsYOVsKQ4zMKtA==
   dependencies:
     stylelint-config-prettier "^8.0.2"
     stylelint-config-rational-order "^0.1.2"
@@ -3088,10 +3088,12 @@
     stylelint-no-unsupported-browser-features "^4.1.4"
     stylelint-order "^4.1.0"
 
-"@voiceflow/tsconfig@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@voiceflow/tsconfig/-/tsconfig-1.1.0.tgz#0c77f13445d617e3e28c43847f93b73f0ec807ee"
-  integrity sha512-7YBmWnhrVafqCnTRR82Gt/Gnf+bPTKnBBEC9vLFCKwgTPM7pWvGDyrb1oJGdfbt+W8vgyJPFL4FFEQG2UjGtPg==
+"@voiceflow/tsconfig@1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@voiceflow/tsconfig/-/tsconfig-1.2.5.tgz#b5ebf633fb56f838bf561dc67eef6bc24c862579"
+  integrity sha512-1HJkuvp3Rekb8q8qxGQViGVJi45FAeEFz4zYRFPfIzc7W0l2Buy8GUO5656Q88bMAAaDtPwxJ4RfRv9ChPvVyQ==
+  dependencies:
+    "@zerollup/ts-transform-paths" "1.7.18"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -3255,7 +3257,7 @@
   dependencies:
     resolve "^1.12.0"
 
-"@zerollup/ts-transform-paths@^1.7.18":
+"@zerollup/ts-transform-paths@1.7.18", "@zerollup/ts-transform-paths@^1.7.18":
   version "1.7.18"
   resolved "https://registry.yarnpkg.com/@zerollup/ts-transform-paths/-/ts-transform-paths-1.7.18.tgz#72f705c66690879e51d53c73dc76c4e2518a8c50"
   integrity sha512-YPVUxvWQVzRx1OBN0Pmkd58+R9FcfUJuwTaPUSoi5rKxuXMtxevTXdfi0w5mEaIH8b0DfL+wg0wFDHiJE+S2zA==
