@@ -3030,10 +3030,10 @@
   dependencies:
     "@commitlint/config-conventional" "^12.1.4"
 
-"@voiceflow/eslint-config@5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@voiceflow/eslint-config/-/eslint-config-5.1.1.tgz#15d205d957b09b0de7875e499bba22966ee69930"
-  integrity sha512-Qn23hmlP8IOq3+IEAh5uRTILvNMgFzR4rJXjxYsK/yrVjHrjVEROwmzNAeMeix4pAECfZ3azbb1AbVN5XmtxdA==
+"@voiceflow/eslint-config@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@voiceflow/eslint-config/-/eslint-config-5.1.2.tgz#21ad9d88eb2e5ce5fd219c0c64da795294ca5315"
+  integrity sha512-lyGKhnOjnN51K3v/o0oOaa/dLqMVpTZmQrVIsQekJTFvuKh1AkW5DkjxX1itCyzDSo/3wSPLPUtbG1JeZr0xlw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.3.0"
     "@typescript-eslint/parser" "^5.3.0"
@@ -3065,10 +3065,10 @@
   resolved "https://registry.yarnpkg.com/@voiceflow/prettier-config/-/prettier-config-1.0.6.tgz#c06ba240703eaed4516bc8719a23604a37ff6d83"
   integrity sha512-Q1VChvhTYGw/jtg2YBrFwd9wjqogvQaSppTrqNaOvmq9tgqLOPgZC20zBAwbM5JX6UPC6bKXN0qit0LLddC/kw==
 
-"@voiceflow/semantic-release-config@1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@voiceflow/semantic-release-config/-/semantic-release-config-1.0.9.tgz#554db37a002625750507465bcf9db0550761cecc"
-  integrity sha512-da0reGwhxtWXLT9f6+uLbiyBjr5DKl2J0INLH11LAzqmi91TdylYLEnl+df70HrZSzTsWMpHkuKIDoudx7bkOg==
+"@voiceflow/semantic-release-config@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@voiceflow/semantic-release-config/-/semantic-release-config-1.1.0.tgz#c5b365e6afc9d4f3bacf846db817293fa5fde9d0"
+  integrity sha512-i/sajZPPICCt1HKz2bFvFTZ1tj9lO6M+kF+3Bt1JzMJ1apfPJFvVTg+qi0usyM3bsY/maGdTTzpZTH88kva3dA==
   dependencies:
     "@semantic-release/commit-analyzer" "^6.1.0"
     "@semantic-release/exec" "^3.3.8"
