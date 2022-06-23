@@ -2856,10 +2856,10 @@
   dependencies:
     "@commitlint/config-conventional" "16.0.0"
 
-"@voiceflow/eslint-config@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@voiceflow/eslint-config/-/eslint-config-6.0.0.tgz#92d1171971a9b912335977e85220293823095f37"
-  integrity sha512-5dydbS8FT13qAWJ/2N05KWEZ40T82+DpUq3FhIffa0vC/s8ZuHsb0eyjTaHyv3rQ35m/tCSa34DFHofyjxOUnw==
+"@voiceflow/eslint-config@6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@voiceflow/eslint-config/-/eslint-config-6.0.1.tgz#53752fc5dc0b4cd215f60b49e7b617cdeeca0801"
+  integrity sha512-SkbFmgKzB5+6tNWMBJFhH0Ss7y5kWuCd+17QenKLcK0F3Fg7vussb+FOhZXJBJh/lyNQcWu/MVdOD/aljGHnyQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.9.1"
     "@typescript-eslint/parser" "5.9.1"
@@ -2886,10 +2886,10 @@
     eslint-plugin-xss "^0.1.9"
     eslint-plugin-you-dont-need-lodash-underscore "^6.12.0"
 
-"@voiceflow/prettier-config@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@voiceflow/prettier-config/-/prettier-config-1.0.6.tgz#c06ba240703eaed4516bc8719a23604a37ff6d83"
-  integrity sha512-Q1VChvhTYGw/jtg2YBrFwd9wjqogvQaSppTrqNaOvmq9tgqLOPgZC20zBAwbM5JX6UPC6bKXN0qit0LLddC/kw==
+"@voiceflow/prettier-config@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@voiceflow/prettier-config/-/prettier-config-1.0.7.tgz#628771e2cfb124f38c5c72164afa84b673da9d2e"
+  integrity sha512-V1DFizimL6bfDdRcwFW8vYvJX9W3rTD6JcYPUsWVR6VxH6ao9mlLWC3cWpQA0nZR8QGT9OmeG4oE/i6L4cRdyw==
 
 "@voiceflow/semantic-release-config@1.1.0":
   version "1.1.0"
