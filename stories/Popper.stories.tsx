@@ -22,9 +22,9 @@ const TriggerButton = React.forwardRef<HTMLButtonElement, { onToggle: () => void
   )
 );
 
-const Content: React.FC<PropsWithChildren<{ isNested?: boolean }>> = ({ isNested, children }) => (
+const Content: React.FC<PropsWithChildren<{ index?: number }>> = ({ index, children }) => (
   <Popper.Content style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
-    <p>{isNested ? 'Nested Content' : 'Content'}</p>
+    <p>{index ? `Nested Content ${index}` : 'Content'}</p>
 
     {children}
   </Popper.Content>
@@ -38,7 +38,7 @@ const Footer: React.FC<PropsWithChildren<{ onClose: VoidFunction }>> = ({ onClos
 
 const NestedPopper: React.FC<{ index?: number; withNested?: boolean }> = ({ index = 0, withNested }) => (
   <Popper.Content style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
-    <Content isNested={!!index}>
+    <Content index={index}>
       {(!index || withNested) && (
         <Popper
           width={withNested ? '240px' : '150px'}
