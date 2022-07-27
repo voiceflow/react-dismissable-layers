@@ -1,8 +1,8 @@
 import React, { createContext, PropsWithChildren, ReactElement, useCallback, useContext, useEffect, useMemo } from 'react';
 
-import GlobalLayersContext from './GlobalLayersContext';
-import { useContextApi } from './hooks';
-import Subscriber, { DismissEventHandler, DismissEventType } from './Subscriber';
+import GlobalLayersContext from './GlobalLayersContext.js';
+import { useContextApi } from './hooks.js';
+import Subscriber, { type DismissEventType, DismissEventHandler } from './Subscriber.js';
 
 interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
   /**
@@ -47,9 +47,9 @@ interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
 }
 
 const DismissableLayerContext = createContext<DismissableLayerValue<HTMLElement | Document>>({
-  _subscriber: new Subscriber(document),
+  _subscriber: new Subscriber(globalThis.document),
 
-  rootNode: document,
+  rootNode: globalThis.document,
 
   dismiss: () => undefined,
 
@@ -110,11 +110,9 @@ export const DismissableLayerProvider = <T extends HTMLElement | Document = Docu
   }, [dismiss, hasHandler, globalLayers]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-underscore-dangle
     parentLayer?._subscriber.registerNestedSubscriber(subscriber);
 
     return () => {
-      // eslint-disable-next-line no-underscore-dangle
       parentLayer?._subscriber.unregisterNestedSubscriber();
     };
   }, [subscriber, parentLayer]);

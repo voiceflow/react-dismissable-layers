@@ -1,8 +1,8 @@
 import { RefObject, useCallback, useContext, useEffect } from 'react';
 
-import DismissableLayerContext from './DismissableLayerContext';
-import { useCache, useEnableDisable } from './hooks';
-import { DismissEventType } from './Subscriber';
+import DismissableLayerContext from './DismissableLayerContext.js';
+import { useCache, useEnableDisable } from './hooks.js';
+import type { DismissEventType } from './Subscriber.js';
 
 interface Options {
   /**

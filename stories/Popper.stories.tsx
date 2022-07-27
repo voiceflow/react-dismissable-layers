@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, jsx-a11y/anchor-is-valid */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-import Popper, { PopperContent, PopperFooter } from './components/Popper';
+import Button from './components/Button';
+import Popper from './components/Popper';
 
 export default {
   title: 'Example/Popper',
@@ -10,44 +12,48 @@ export default {
 
 const Template: ComponentStory<typeof Popper> = (args) => <Popper {...args} />;
 
-const Button = React.forwardRef<HTMLButtonElement, { onToggle: () => void; isNested?: boolean; isOpened: boolean }>(
+const PLACEMENTS = ['bottom-start', 'bottom-end', 'right-start', 'right-end', 'top-start', 'top-end', 'left-start', 'left-end'] as const;
+
+const TriggerButton = React.forwardRef<HTMLButtonElement, { onToggle: () => void; isNested?: boolean; isOpened: boolean }>(
   ({ onToggle, isNested, isOpened }, ref) => (
-    <button ref={ref} onClick={onToggle} style={{ color: isOpened ? 'blue' : 'black' }}>
+    <Button ref={ref} onClick={onToggle} active={isOpened}>
       {isNested ? 'Open Nested Popper' : 'Open Popper'}
-    </button>
+    </Button>
   )
 );
 
-const Content: React.FC<{ isNested?: boolean; onClose?: () => void }> = ({ isNested, onClose }) => (
-  <PopperContent style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
+const Content: React.FC<PropsWithChildren<{ isNested?: boolean }>> = ({ isNested, children }) => (
+  <Popper.Content style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
     <p>{isNested ? 'Nested Content' : 'Content'}</p>
-    {onClose && <button onClick={onClose}>Close</button>}
-  </PopperContent>
+
+    {children}
+  </Popper.Content>
 );
 
-const NestedPopper: React.FC<{ onClose: () => void; isNested?: boolean; withFooter?: boolean }> = ({ onClose, isNested, withFooter }) => (
-  <PopperContent style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
-    <Content onClose={onClose} isNested={isNested} />
+const Footer: React.FC<PropsWithChildren<{ onClose: VoidFunction }>> = ({ onClose }) => (
+  <Popper.Footer>
+    <a onClick={onClose}>Close</a>
+  </Popper.Footer>
+);
 
-    <Popper
-      width={withFooter ? '240px' : '150px'}
-      height={withFooter ? '300px' : '200px'}
-      portalNode={document.body}
-      placement="right"
-      renderContent={({ onClose }) => <NestedPopper onClose={onClose} isNested withFooter={withFooter} />}
-      renderFooter={
-        withFooter
-          ? ({ onClose }) => (
-              <PopperFooter style={{ height: '140px' }}>
-                <NestedPopper onClose={onClose} isNested withFooter={withFooter} />
-              </PopperFooter>
-            )
-          : undefined
-      }
-    >
-      {(props) => <Button {...props} isNested />}
-    </Popper>
-  </PopperContent>
+const NestedPopper: React.FC<{ index?: number; withNested?: boolean }> = ({ index = 0, withNested }) => (
+  <Popper.Content style={{ padding: '12px', justifyContent: 'center', alignItems: 'center' }}>
+    <Content isNested={!!index}>
+      {(!index || withNested) && (
+        <Popper
+          width={withNested ? '240px' : '150px'}
+          height={withNested ? '240px' : '200px'}
+          placement={PLACEMENTS[index % PLACEMENTS.length]}
+          portalNode={document.body}
+          renderFooter={({ onClose }) => <Footer onClose={onClose} />}
+          renderContent={() => <NestedPopper index={index + 1} withNested={withNested} />}
+          preventOverflowPadding={index * 5}
+        >
+          {(props) => <TriggerButton {...props} isNested={!!index} />}
+        </Popper>
+      )}
+    </Content>
+  </Popper.Content>
 );
 
 export const Simple = Template.bind({});
@@ -55,27 +61,29 @@ Simple.args = {
   width: '150px',
   height: '200px',
   portalNode: document.body,
-  children: (props) => <Button {...props} />,
+  children: (props) => <TriggerButton {...props} />,
   renderContent: () => <Content />,
 };
 
-export const WithCloseButton = Template.bind({});
-WithCloseButton.args = {
+export const WithCloseTriggerButton = Template.bind({});
+WithCloseTriggerButton.args = {
   width: '150px',
   height: '200px',
   portalNode: document.body,
-  children: (props) => <Button {...props} />,
-  renderContent: ({ onClose }) => <Content onClose={onClose} />,
+  children: (props) => <TriggerButton {...props} />,
+  renderFooter: ({ onClose }) => <Footer onClose={onClose} />,
+  renderContent: () => <Content />,
 };
 
 export const Nested = Template.bind({});
 Nested.args = {
-  width: '150px',
-  height: '200px',
+  width: '240px',
+  height: '240px',
   portalNode: document.body,
   placement: 'right',
-  children: (props) => <Button {...props} />,
-  renderContent: ({ onClose }) => <NestedPopper onClose={onClose} />,
+  children: (props) => <TriggerButton {...props} />,
+  renderFooter: ({ onClose }) => <Footer onClose={onClose} />,
+  renderContent: () => <NestedPopper />,
 };
 
 export const MultipleNested = Template.bind({});
@@ -84,11 +92,7 @@ MultipleNested.args = {
   height: '300px',
   portalNode: document.body,
   placement: 'right',
-  children: (props) => <Button {...props} />,
-  renderContent: ({ onClose }) => <NestedPopper onClose={onClose} withFooter />,
-  renderFooter: ({ onClose }) => (
-    <PopperFooter style={{ height: '140px' }}>
-      <NestedPopper onClose={onClose} isNested withFooter />
-    </PopperFooter>
-  ),
+  children: (props) => <TriggerButton {...props} />,
+  renderFooter: ({ onClose }) => <Footer onClose={onClose} />,
+  renderContent: () => <NestedPopper withNested />,
 };

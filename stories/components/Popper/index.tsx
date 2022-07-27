@@ -1,11 +1,9 @@
 import React from 'react';
 import { Manager, Modifier, Popper as ReactPopper, PopperProps as ReactPopperProps, Reference } from 'react-popper';
 
-import { DismissableLayerProvider, useDismissable } from '../../../src';
-import Portal, { portalRootNode } from '../Portal';
-import { Body, Container } from './components';
-
-export { Content as PopperContent, Footer as PopperFooter } from './components';
+import { DismissableLayerProvider, useDismissable } from '../../../src/index.js';
+import Portal, { portalRootNode } from '../Portal/index.js';
+import { Body, Container, Content, Footer } from './components/index.js';
 
 interface RendererProps {
   onClose: () => void;
@@ -21,6 +19,7 @@ export interface PopperProps<M> {
   width?: string;
   height?: string;
   opened?: boolean;
+  offset?: number;
   onClose?: () => void;
   children: (props: ChildrenProps) => React.ReactNode;
   modifiers?: ReactPopperProps<M>['modifiers'];
@@ -34,11 +33,12 @@ export interface PopperProps<M> {
 const Popper = <M,>({
   width,
   height,
+  offset = 5,
   opened,
   onClose,
   children,
   modifiers,
-  placement = 'bottom',
+  placement = 'right',
   portalNode = portalRootNode,
   renderFooter,
   renderContent,
@@ -77,7 +77,7 @@ const Popper = <M,>({
               placement={placement}
               modifiers={
                 [
-                  { name: 'offset', options: { offset: [0, 5] } },
+                  { name: 'offset', options: { offset: [offset, offset] } },
                   { name: 'preventOverflow', options: { boundary: portalNode, padding: preventOverflowPadding } },
                   ...(modifiers || []),
                 ] as Modifier<M>[]
@@ -102,4 +102,4 @@ const Popper = <M,>({
   );
 };
 
-export default Popper;
+export default Object.assign(Popper, { Content, Footer });

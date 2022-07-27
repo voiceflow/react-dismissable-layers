@@ -1,4 +1,5 @@
-import { DismissableLayersGlobalProvider } from '../src'
+import React from 'react'
+import { DismissableLayersGlobalProvider } from '../src/index.js'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

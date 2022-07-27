@@ -9,7 +9,6 @@ export const useEnableDisable = (defaultValue = false): [boolean, VoidFunction, 
   return [value, onEnable, onDisable];
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export const useCache = <T extends object>(defaultData: T, dataToUpdate: Partial<T> = defaultData): MutableRefObject<T> => {
   const cache = useRef(defaultData);
 
@@ -18,5 +17,4 @@ export const useCache = <T extends object>(defaultData: T, dataToUpdate: Partial
   return cache;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export const useContextApi = <T extends object>(api: T): T => useMemo(() => api, Object.values(api));

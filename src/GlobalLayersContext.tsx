@@ -1,6 +1,6 @@
-import React, { createContext, FC, useCallback, useRef } from 'react';
+import React, { createContext, FC, PropsWithChildren, useCallback, useRef } from 'react';
 
-import { useContextApi } from './hooks';
+import { useContextApi } from './hooks.js';
 
 interface GlobalLayer {
   readonly dismiss: VoidFunction;
@@ -28,7 +28,7 @@ const GlobalLayersContext = createContext<GlobalLayersContextValue>({
   hasHandlers: () => false,
 });
 
-export const GlobalLayersProvider: FC = ({ children }) => {
+export const GlobalLayersProvider: FC<PropsWithChildren> = ({ children }) => {
   // we really don't want to use state here to escape unnecessary rerenders
   const layersRefs = useRef<GlobalLayer[]>([]);
 

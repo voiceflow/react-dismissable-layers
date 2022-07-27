@@ -2,7 +2,7 @@
   "extends": ["@voiceflow/eslint-config", "@voiceflow/eslint-config/frontend", "@voiceflow/eslint-config/typescript"],
   "overrides": [
     {
-      "files": ["test/**/*", "config/**/*", "stories/**/*", "*.config.js", ".*rc.js"],
+      "files": ["test/**/*", "config/**/*", "stories/**/*", "*.config.js", ".*rc.js", ".storybook/**/*"],
       "extends": ["@voiceflow/eslint-config/utility"],
       "rules": {
         // off
@@ -16,6 +16,7 @@
 
         "import/prefer-default-export": "off",
         "import/no-cycle": "off",
+        "import/extensions": "off",
         "import/no-extraneous-dependencies": "off"
       }
     },

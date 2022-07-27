@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "target": "ES2015",
+    "module": "ESNext",
+    "moduleResolution": "Node16",
     "jsx": "react",
     "declaration": true,
     "pretty": true,
     "rootDir": "src",
     "strict": true,
+    "skipLibCheck": true,
     "sourceMap": false,
     "noImplicitAny": false,
     "noUnusedLocals": true,
@@ -15,20 +16,9 @@
     "noImplicitReturns": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "lib",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "outDir": "esm",
+    "lib": ["esnext", "dom"],
     "importHelpers": true
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "esm",
-    "tests",
-    "stories",
-    "jest.config.ts",
-    "jest.config.*.ts"
-  ]
+  "exclude": ["node_modules", "lib", "esm", "tests", "stories", "jest.config.ts", "jest.config.*.ts"]
 }
