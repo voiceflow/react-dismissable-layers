@@ -20,11 +20,12 @@ export interface PopperProps<M> {
   height?: string;
   opened?: boolean;
   offset?: number;
-  onClose?: () => void;
+  onClose?: VoidFunction;
   children: (props: ChildrenProps) => React.ReactNode;
   modifiers?: ReactPopperProps<M>['modifiers'];
   placement?: ReactPopperProps<M>['placement'];
   portalNode?: HTMLElement;
+  preventClose?: null | ((event?: Event) => boolean);
   renderFooter?: (props: RendererProps) => React.ReactNode;
   renderContent: (props: RendererProps) => React.ReactNode;
   preventOverflowPadding?: number;
@@ -40,6 +41,7 @@ const Popper = <M,>({
   modifiers,
   placement = 'right',
   portalNode = portalRootNode,
+  preventClose,
   renderFooter,
   renderContent,
   preventOverflowPadding = 8,
@@ -48,7 +50,7 @@ const Popper = <M,>({
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const [isOpened, onToggle, onForceClose] = useDismissable(opened, { ref: containerRef, onClose });
+  const [isOpened, onToggle, onForceClose] = useDismissable(opened, { ref: containerRef, onClose, preventClose });
 
   React.useEffect(() => {
     if (!initializedRef.current) {
