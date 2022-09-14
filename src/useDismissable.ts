@@ -16,6 +16,11 @@ interface Options {
   onClose?: null | VoidFunction;
 
   /**
+   * callback which will be invoked when the popper tries to close. If returns truthy, it prevents the close
+   */
+  preventClose?: null | ((event?: Event) => boolean);
+
+  /**
    * event on which popper will be closed, default is `'click'`
    */
   dismissEvent?: DismissEventType;
@@ -47,7 +52,7 @@ type Api = readonly [
 
 const useDismissable = (
   defaultValue = false,
-  { ref, onClose, dismissEvent = 'click', disableLayers = false, skipDefaultPrevented = true }: Options = {}
+  { ref, onClose, dismissEvent = 'click', disableLayers = false, skipDefaultPrevented = true, preventClose }: Options = {}
   // eslint-disable-next-line sonarjs/cognitive-complexity
 ): Api => {
   const dismissableLayer = useContext(DismissableLayerContext);
@@ -65,6 +70,7 @@ const useDismissable = (
   const handleClose = useCallback(
     (event?: Event) => {
       const skipEvent =
+        preventClose?.(event) ||
         !cache.current.isOpened ||
         (cache.current.skipDefaultPrevented && event?.defaultPrevented) ||
         (event?.target && ref?.current?.contains?.(event.target as Element));
@@ -76,7 +82,7 @@ const useDismissable = (
       setClosed();
       cache.current.onClose?.();
     },
-    [ref, cache, setClosed]
+    [ref, cache, setClosed, preventClose]
   );
 
   const forceClose = useCallback(() => handleClose(), [handleClose]);

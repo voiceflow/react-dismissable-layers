@@ -96,3 +96,15 @@ MultipleNested.args = {
   renderFooter: ({ onClose }) => <Footer onClose={onClose} />,
   renderContent: () => <NestedPopper withNested />,
 };
+
+export const ClosePrevented = Template.bind({});
+ClosePrevented.args = {
+  width: '240px',
+  height: '300px',
+  portalNode: document.body,
+  preventClose: () => true,
+  placement: 'right',
+  children: (props) => <TriggerButton {...props} />,
+  renderFooter: ({ onClose }) => <Footer onClose={onClose} />,
+  renderContent: () => <Content />,
+};
