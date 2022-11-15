@@ -1,6 +1,5 @@
 {
   "name": "react-dismissable-layers",
-  "type": "module",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
