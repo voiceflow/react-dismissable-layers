@@ -58,12 +58,15 @@ const useDismissable = (
   const dismissableLayer = useContext(DismissableLayerContext);
 
   const [isOpened, setOpen, setClosed] = useEnableDisable(defaultValue);
-  const cache = useCache({ isOpened, onClose, skipDefaultPrevented });
+  const cache = useCache({ isOpened, onClose, disableLayers, skipDefaultPrevented });
 
   const handleOpen = useCallback(() => {
     if (cache.current.isOpened) return;
 
-    dismissableLayer.dismiss();
+    if (!cache.current.disableLayers) {
+      dismissableLayer.dismiss();
+    }
+
     setOpen();
   }, [cache, setOpen, dismissableLayer]);
 

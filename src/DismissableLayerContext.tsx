@@ -2,8 +2,8 @@ import React, { createContext, PropsWithChildren, ReactElement, useCallback, use
 
 import GlobalLayersContext from './GlobalLayersContext.js';
 import { useContextApi } from './hooks.js';
-import Subscriber, { DismissEventHandler } from './Subscriber.js';
 import type { DismissEventType } from './Subscriber.js';
+import Subscriber, { DismissEventHandler } from './Subscriber.js';
 
 interface DismissableLayerValue<T extends HTMLElement | Document = Document> {
   /**
