@@ -58,7 +58,7 @@ const useDismissable = (
   const dismissableLayer = useContext(DismissableLayerContext);
 
   const [isOpened, setOpen, setClosed] = useEnableDisable(defaultValue);
-  const cache = useCache({ isOpened, onClose, disableLayers, skipDefaultPrevented });
+  const cache = useCache({ isOpened, onClose, disableLayers, preventClose, skipDefaultPrevented });
 
   const handleOpen = useCallback(() => {
     if (cache.current.isOpened) return;
@@ -73,7 +73,7 @@ const useDismissable = (
   const handleClose = useCallback(
     (event?: Event) => {
       const skipEvent =
-        preventClose?.(event) ||
+        cache.current.preventClose?.(event) ||
         !cache.current.isOpened ||
         (cache.current.skipDefaultPrevented && event?.defaultPrevented) ||
         (event?.target && ref?.current?.contains?.(event.target as Element));
@@ -85,7 +85,7 @@ const useDismissable = (
       setClosed();
       cache.current.onClose?.();
     },
-    [ref, cache, setClosed, preventClose]
+    [ref, cache, setClosed]
   );
 
   const forceClose = useCallback(() => handleClose(), [handleClose]);
