@@ -76,7 +76,12 @@ const useDismissable = (
         cache.current.preventClose?.(event) ||
         !cache.current.isOpened ||
         (cache.current.skipDefaultPrevented && event?.defaultPrevented) ||
-        (event?.target && ref?.current?.contains?.(event.target as Element));
+        (ref?.current &&
+          event?.target &&
+          event.target instanceof Node &&
+          // sometimes event target can be a unmounted due to state changes in the same event loop
+          // so .contains will return false, but we can check it by composedPath
+          (event.target.isConnected ? ref.current.contains?.(event.target) : event.composedPath().some((target) => ref.current === target)));
 
       if (skipEvent) {
         return;
